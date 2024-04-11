@@ -1,0 +1,27 @@
+<div class="modal-dialog" *ngIf="generateWhat">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="confirm-delete-dialog-title">Generate First Round Matches</h5>
+      <button type="button"
+              class="btn-close"
+              aria-label="Close"
+              (click)="closeDialog()"></button>
+    </div>
+    <div class="modal-body">
+      Do you really want to generate first round matches on “{{generateWhat.name}}“ tournament?
+      <br>
+      <b>If races are present - they will all be overwritten and can not be restored!</b>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary"
+              (click)="closeDialog()"
+      >
+        No, stop
+      </button>
+      <button type="button" class="btn btn-secondary"
+              (click)="confirmDelete()">
+        Yes, generate
+      </button>
+    </div>
+  </div>
+</div>

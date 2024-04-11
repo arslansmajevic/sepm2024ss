@@ -1,0 +1,120 @@
+
+<h1 class="display-1">{{heading}}</h1>
+
+
+<form #form="ngForm" [class.was-validated]="form.submitted">
+  <div class="row">
+    <!-- Start name and date of birth row -->
+    <div class="mb-2 col-lg-6">
+      <!-- When nesting rows, always make row > col-* > row. The Bootstrap classes do not work right when an element is both col* and row -->
+      <div class="row">
+        <label for="horseName" class="col-form-label text-md-end text-muted col-md-2 col-lg-4">
+          Name
+        </label>
+        <div class="col-md-10 col-lg-8">
+          <div class="form-control" id="horseName">
+            {{horse.name}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mb-2 col-lg-6">
+      <div class="row">
+        <label for="horseDateOfBirth" class="col-form-label text-md-end text-muted col-md-2 col-lg-4">
+          Date of Birth
+        </label>
+        <div class="col-md-10 col-lg-8"
+        >
+          <!-- pattern and placeholder are fallbacks for browser, that use a simple text input for type="date"
+               The date format of the plain HTML date input, in browser that support it is, sadly, not changeable in a cross-browser way
+            -->
+          <div class="form-control" id="horseDateOfBirth">
+            {{dateOfBirth}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End name and date of birth row -->
+  </div>
+
+  <div class="row">
+    <!-- Start sex row -->
+    <div class="mb-2 col-lg-6">
+      <div class="row">
+        <label for="horseSex" class="col-form-label text-md-end text-muted col-md-2 col-lg-4">
+          Sex
+        </label>
+        <div class="col-md-10 col-lg-8">
+          <div class="form-control" id="horseSex">
+            {{horse.sex}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-2 col-lg-6">
+      <div class="row">
+        <label for="horseBreed" class="col-form-label text-md-end text-muted col-md-2 col-lg-4">
+          Breed
+        </label>
+        <div class="col-md-10 col-lg-8"
+        >
+          <div class="form-control" id="horseBreed">
+            {{formatBreedName(horse.breed)}}
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- End sex row -->
+  </div>
+
+  <div class="row">
+    <!-- Start height and weight row -->
+    <div class="mb-2 col-lg-6">
+      <div class="row"><label for="horseHeight" class="col-form-label text-md-end text-muted col-md-2 col-lg-4">
+        Height [m]
+      </label>
+        <div class="col-md-10 col-lg-8">
+          <div class="form-control" id="horseHeight">
+            {{height}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mb-2 col-lg-6">
+      <div class="row"><label for="horseWeight" class="col-form-label text-md-end text-muted col-md-2 col-lg-4">
+        Weight [kg]
+      </label>
+        <div class="col-md-10 col-lg-8">
+
+          <div class="form-control" id="horseWeight">
+            {{weight}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-confirm-delete-dialog *ngIf="deleteConfirmationVisible"
+                             [deleteWhat]="horseForDeletion"
+                             (close)="onCloseDialog()"
+                             (confirm)="onDelete(horseForDeletion)">
+  </app-confirm-delete-dialog>
+
+  <div class="mt-4 d-flex flex-row">
+    <button type="button"
+            class="btn btn-danger"
+            (click)="showDeleteConfirmation(horse)">
+      <i class="bi bi-trash"></i>
+      Delete
+    </button>
+    <span class="flex-grow-1"></span>
+    <a class="btn btn-primary"
+       [routerLink]="['../edit']"
+    >
+      <i class="bi bi-pencil"></i>
+      Edit
+    </a>
+  </div>
+</form>
